@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "antispawn",
+  "version": "${version}",
+  "name": "antispawn",
+  "description": "A server-side mod to prevent mob spawning in certain areas",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/antispawn/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "me.lennyd.antispawn.antispawn"
+    ]
+  },
+  "mixins": [
+    "antispawn.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=1.21.6 <1.21.9"
+  }
+}

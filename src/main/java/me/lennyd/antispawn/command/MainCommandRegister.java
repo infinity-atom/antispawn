@@ -14,6 +14,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Objects;
+
 public class MainCommandRegister {
 
     public static void register(
@@ -25,12 +27,9 @@ public class MainCommandRegister {
                 .then(CommandManager.literal("info")
                         .executes((commandContext -> {
                             MutableText output = Text.literal("");
-                            output.append(Util.formatInfo("antispawn v1.0, by 01lenny\n"));
+                            output.append(Util.formatInfo("antispawn v1.1, by 01lenny\n"));
                             output.append(Util.formatInfo("https://github.com/infinity-atom/antispawn\n"));
-                            output.append(Util.formatInfo("https://modrinth.com/project/antispawn\n"));
-                            output.append(Util.formatInfo("\n"));
-                            output.append(Util.formatInfo("To get started, run /antispawn add <id> <corner1> <corner2>\n"));
-                            output.append(Util.formatInfo("This will create a region from <corner1> to <corner2> where no mobs can spawn."));
+                            output.append(Util.formatInfo("https://modrinth.com/project/antispawn"));
 
                             commandContext.getSource().sendMessage(output);
 
@@ -44,6 +43,8 @@ public class MainCommandRegister {
                             };
 
                             for (ConfigRegion region : antispawn.CF.regions) {
+                                if (!Objects.equals(region.dimension,
+                                        commandContext.getSource().getPlayer().getWorld().getRegistryKey().getValue().toString())) continue;
                                 if (Util.isInsideBox(commandContext.getSource().getPlayer().getBlockPos(),
                                         new BlockPos(region.corner1X, region.corner1Y, region.corner1Z),
                                         new BlockPos(region.corner2X, region.corner2Y, region.corner2Z))) {
@@ -103,6 +104,8 @@ public class MainCommandRegister {
                                         r.corner2X = corner2.getX();
                                         r.corner2Y = corner2.getY();
                                         r.corner2Z = corner2.getZ();
+
+                                        r.dimension = commandContext.getSource().getPlayer().getWorld().getRegistryKey().getValue().toString();
 
                                         antispawn.CF.regions.add(r);
                                         ConfigManager.save();

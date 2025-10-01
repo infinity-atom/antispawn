@@ -18,7 +18,7 @@ public class antispawn implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("[antispawn] 1.0 init");
+        LOGGER.info("[antispawn] 1.1 init");
 
         ConfigManager.load();
         CF = ConfigManager.getConfig();

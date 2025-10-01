@@ -13,4 +13,6 @@ public class ConfigRegion {
     public int corner2X = 1;
     public int corner2Y = 1;
     public int corner2Z = 1;
+
+    public String dimension = "minecraft:overworld";
 }
